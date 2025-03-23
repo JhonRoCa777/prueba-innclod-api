@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('fullname', 60);
             $table->string('document', 15)->unique();
             $table->string('email', 60)->unique();
-            $table->boolean('state');
+            $table->boolean('state')->default(true);
             $table->timestamps();
         });
     }

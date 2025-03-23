@@ -9,7 +9,9 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fullname', 'document', 'email', 'state'];
+    protected $fillable = ['fullname', 'document', 'email'];
+
+    protected $hidden = ['state', 'created_at', 'updated_at'];
 
     public function products()
     {

@@ -15,19 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return response()->json(['message' => 'Hola Mundo']);
+});
+
 /*---------------- CLIENTS ----------------*/
 Route::prefix('clients')
 ->controller(ClientController::class)
 ->group(function () {
 
-    Route::post('/', 'getByDocument');
     Route::post('/', 'create');
+
+    Route::get('/{client_document}', 'getByDocument');
 
     Route::prefix('/{client_id}')
     ->group(function () {
 
         Route::put('/', 'update');
-        Route::delete('/', 'products');
-        Route::delete('/', 'orders');
+        Route::get('/products', 'getProducts');
+        Route::get('/orders', 'getOrders');
+
     });
 });

@@ -11,6 +11,8 @@ class Product extends Model
 
     protected $fillable = ['name', 'stock', 'state'];
 
+    protected $hidden = ['state', 'created_at', 'updated_at'];
+
     public function clients()
     {
         return $this->belongsToMany(Client::class, 'clients_products');

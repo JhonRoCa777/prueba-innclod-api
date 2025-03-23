@@ -20,12 +20,15 @@ class ClientProductSeeder extends Seeder
             'product_id' => 1,
         ]);
 
-        $productsId = Product::where('id', '>', 1)->pluck('id')->shuffle();
+        $productsId = Product::where('id', '!=', 1)
+                     ->inRandomOrder()
+                     ->limit(7)
+                     ->pluck('id');
 
-        for ($i = 1; $i <= 7; $i++) {
+        foreach ($productsId as $productId) {
             ClientProduct::create([
                 'client_id' => 1,
-                'product_id' => $productsId[$i],
+                'product_id' => $productId,
             ]);
         }
     }

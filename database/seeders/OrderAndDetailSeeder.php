@@ -20,15 +20,16 @@ class OrderAndDetailSeeder extends Seeder
 
         for ($orderIndex = 1; $orderIndex <= 2; $orderIndex++) {
 
-            $productsId = Product::where('id', '>', 1)->pluck('id')->shuffle();
+            $productsId = Product::where('id', '!=', 1)
+                            ->inRandomOrder()
+                            ->limit(3)
+                            ->pluck('id');
 
             $order = Order::create([
                 'client_id' => $clientId,
             ]);
 
-            $selectedProducts = $productsId->random(3);
-
-            foreach ($selectedProducts as $productId) {
+            foreach ($productsId as $productId) {
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $productId,
