@@ -60,8 +60,18 @@ class ClientController extends Controller
             return response()->json('Cliente No Encontrado', Response::HTTP_NOT_FOUND);
         }
 
-        $products = $client->products;
+        return response()->json($client->products);
+    }
 
-        return response()->json($products);
+    public function getOrders($client_id)
+    {
+        $client = Client::with(['orders.orderDetails.product'])
+        ->find($client_id);
+
+        if (!$client) {
+            return response()->json('Cliente No Encontrado', Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($client->orders);
     }
 }

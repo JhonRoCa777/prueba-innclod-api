@@ -11,6 +11,8 @@ class Order extends Model
 
     protected $fillable = ['client_id'];
 
+    protected $hidden = ['updated_at'];
+
     public function client()
     {
         return $this->belongsTo(Client::class);
