@@ -52,6 +52,18 @@ class ClientController extends Controller
         }
     }
 
+    public function update(ClientRequest $request, $client_id)
+    {
+        $client = Client::find($client_id);
+
+        if (!$client) {
+            return response()->json('Cliente No Encontrado', Response::HTTP_NOT_FOUND);
+        }
+
+        $client->update($request->all());
+        return response()->json('Cliente Actualizado Correctamente', Response::HTTP_CREATED);
+    }
+
     public function getProducts($client_id)
     {
         $client = Client::find($client_id);
