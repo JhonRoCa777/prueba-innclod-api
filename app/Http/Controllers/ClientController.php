@@ -43,7 +43,7 @@ class ClientController extends Controller
 
             DB::commit();
 
-            return response()->json('Cliente Creado Correctamente', Response::HTTP_CREATED);
+            return response()->json($client, Response::HTTP_CREATED);
         }
         catch (\Exception $e) {
             DB::rollBack();
@@ -61,7 +61,7 @@ class ClientController extends Controller
         }
 
         $client->update($request->all());
-        return response()->json('Cliente Actualizado Correctamente', Response::HTTP_CREATED);
+        return response()->json($client, Response::HTTP_CREATED);
     }
 
     public function getProducts($client_id)
