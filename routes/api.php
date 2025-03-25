@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,13 @@ Route::prefix('clients')
         Route::get('/orders', 'getOrders');
 
     });
+});
+
+/*---------------- ORDERS ----------------*/
+Route::prefix('orders')
+->controller(OrderController::class)
+->group(function () {
+
+    Route::post('/', 'create');
+
 });
