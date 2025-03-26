@@ -25,16 +25,16 @@ Route::prefix('clients')
 ->controller(ClientController::class)
 ->group(function () {
 
-    Route::post('/', 'create');
+    Route::post('/', 'create')->name('clients.create');
 
-    Route::get('/{client_document}', 'getByDocument');
+    Route::get('/{client_document}', 'getByDocument')->name('clients.getByDocument');
 
     Route::prefix('/{client_id}')
     ->group(function () {
 
-        Route::put('/', 'update');
-        Route::get('/products', 'getProducts');
-        Route::get('/orders', 'getOrders');
+        Route::put('/', 'update')->name('clients.update');
+        Route::get('/products', 'getProducts')->name('clients.getProducts');
+        Route::get('/orders', 'getOrders')->name('clients.getOrders');
 
     });
 });
@@ -44,6 +44,6 @@ Route::prefix('orders')
 ->controller(OrderController::class)
 ->group(function () {
 
-    Route::post('/', 'create');
+    Route::post('/', 'create')->name('orders.create');
 
 });

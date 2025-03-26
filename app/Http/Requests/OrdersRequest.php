@@ -22,13 +22,13 @@ class OrdersRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:clients,id'],
+            'client_id' => ['required', 'integer', 'exists:clients,id'],
             'order_details' => ['required', 'array', 'min:1'],
             'order_details.*.product_id' => [
                 'required',
                 'integer',
                 function ($attribute, $value, $fail) {
-                    $userId = $this->input('user_id');
+                    $userId = $this->input('client_id');
 
                     $exists = ClientProduct::where('client_id', $userId)
                         ->where('product_id', $value)
@@ -46,9 +46,9 @@ class OrdersRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'Campo obligatorio.',
-            'user_id.integer' => 'Debe ser número entero.',
-            'user_id.exists' => 'Registro No existente.',
+            'client_id.required' => 'Campo obligatorio.',
+            'client_id.integer' => 'Debe ser número entero.',
+            'client_id.exists' => 'Registro No existente.',
 
             'order_details.required' => 'Campo obligatorio.',
             'order_details.array' => 'Debe ser un arreglo.',

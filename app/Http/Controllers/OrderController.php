@@ -15,7 +15,7 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
 
-            $clientId = $request->input('user_id');
+            $clientId = $request->input('client_id');
             $order_details = $request->input('order_details');
 
             $order = Order::create([
@@ -28,7 +28,8 @@ class OrderController extends Controller
 
                 $productModel = Product::find($productId);
 
-                if ($productModel->stock < $quantity) {
+                if ($productModel->stock < $quantity){
+                    DB::rollBack();
                     return response()->json('Stock Insuficiente', Response::HTTP_NOT_FOUND);
                 }
 

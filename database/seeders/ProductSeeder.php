@@ -14,18 +14,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::create([
-            'name' => 'Celular Nokia',
-            'stock' => 0,
-            'state' => true,
-        ]);
-
-        for ($i = 1; $i < 10; $i++) {
-            Product::create([
-                'name' => 'Producto ' . $i,
-                'stock' => rand(5, 50),
-                'state' => true,
-            ]);
-        }
+        Product::factory()->count(10)->create();
     }
 }
